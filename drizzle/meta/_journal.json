@@ -8,6 +8,27 @@
       "when": 1750255603438,
       "tag": "0000_powerful_sabretooth",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1750315564879,
+      "tag": "0001_tiny_cobalt_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1750317176458,
+      "tag": "0002_classy_scream",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1750319008802,
+      "tag": "0003_ordinary_puck",
+      "breakpoints": true
     }
   ]
 }
