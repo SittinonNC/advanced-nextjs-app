@@ -11,27 +11,32 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient } from "@/lib/auth-client";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  // const route = useRouter();
+  const route = useRouter();
   const handleLogin = async () => {
     await authClient.signIn.email(
       {
         email: "user1@example.com",
         password: "password123",
-        callbackURL: "/",
+        // callbackURL: "/",
       },
       {
         onRequest: (ctx) => {
           console.log("Logging in...", ctx.body);
         },
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
           console.log("Login successful:", data);
-          // route.push("/");
+          const { data: session } = await authClient.getSession();
+          if (session?.user.role === "admin") {
+            route.push("/dashboard");
+          } else {
+            route.push("/");
+          }
         },
         onError: (error) => {
           console.error("Login failed:", error);
