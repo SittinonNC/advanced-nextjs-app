@@ -1,19 +1,46 @@
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
+"use client";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { authClient } from "@/lib/auth-client";
+// import { useRouter } from "next/navigation";
 
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
+  // const route = useRouter();
+  const handleLogin = async () => {
+    await authClient.signIn.email(
+      {
+        email: "user1@example.com",
+        password: "password123",
+        callbackURL: "/",
+      },
+      {
+        onRequest: (ctx) => {
+          console.log("Logging in...", ctx.body);
+        },
+        onSuccess: (data) => {
+          console.log("Login successful:", data);
+          // route.push("/");
+        },
+        onError: (error) => {
+          console.error("Login failed:", error);
+          alert("Login failed. Please check your credentials.");
+        },
+      }
+    );
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -51,9 +78,6 @@ export function LoginForm({
                 <Button type="submit" className="w-full">
                   Login
                 </Button>
-                <Button variant="outline" className="w-full">
-                  Login with Google
-                </Button>
               </div>
             </div>
             <div className="mt-4 text-center text-sm">
@@ -63,8 +87,11 @@ export function LoginForm({
               </a>
             </div>
           </form>
+          <Button variant="outline" className="w-full" onClick={handleLogin}>
+            Login with Hard code
+          </Button>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }

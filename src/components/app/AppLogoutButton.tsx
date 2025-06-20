@@ -21,7 +21,7 @@ const AppLogoutButton = () => {
     <div>
       <Button
         onClick={handleLogout}
-        className="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-zinc-900 px-3 py-1 text-sm/6 font-medium text-white transition hover:bg-zinc-700"
+        className="inline-flex justify-center gap-0.5 overflow-hidden rounded-full bg-red-500 px-3 py-1 text-sm/6 font-medium text-white transition hover:bg-zinc-700"
       >
         <IconLogout />
         Logout

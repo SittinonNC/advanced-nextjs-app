@@ -20,4 +20,21 @@ export const auth = betterAuth({
     requireEmailVerification: false,
     minPasswordLength: 6,
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: false,
+        defaultValue: "user",
+        input: false, // don't allow user to set role
+      },
+    },
+  },
+  session: {
+    expiresIn: 60 * 60 * 24 * 7, // 7 days(default)
+    updateAge: 60 * 60 * 24, // 1 day (every 1 day session is updated)
+  },
+  advanced:{
+    cookiePrefix: "Nice"
+  }
 });
